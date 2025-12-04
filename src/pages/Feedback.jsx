@@ -19,7 +19,7 @@ const Feedback = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
-    console.log("form data: ", formData)
+
     const { data, status } = apiClient.post(FEEDBACK_ROUTES, { ...formData, rating: rating });
     if (data && status === 201) {
       toast.success(data.message);

@@ -26,7 +26,7 @@ const UserInputForm = () => {
   const [loading, setLoading] = useState(false);
 
   const handleUserInput = async (userInputData) => {
-    console.log("form-data: ", userInputData);
+
     setLoading(true);
     try {
       const { data, status } = await apiClient.post(
@@ -41,14 +41,14 @@ const UserInputForm = () => {
       );
 
       if (data && status === 200) {
-        console.log("recommendateFertilizer: ", data);
+
         const Fertilizer = {
           ...userInputData,
           soilType: userInputData.Soil_Type,
           cropType: userInputData.Crop_Type,
           ...data,
         };
-        console.log("Fertilizer: ", Fertilizer);
+
         setRecommendateFertilizer(Fertilizer);
         setShowFertilizer(true);
         reset();
@@ -56,10 +56,10 @@ const UserInputForm = () => {
       }
     } catch (error) {
       if (isAxiosError(error)) {
-        console.log(error.response);
+
         toast.error(error.response.data.message);
       } else {
-        console.log("userInput error", error);
+
         toast.error(error.message);
       }
       setShowFertilizer(false);

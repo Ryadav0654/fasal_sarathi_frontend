@@ -1,10 +1,10 @@
 
 
-const Button = ({className, onClickHandler, btnname, ...props}) => {
-  // console.log({...props})
+const Button = ({ className, onClickHandler, btnname, ...props }) => {
+
   return (
     <>
-    <button className={` ${className}`} onClick={onClickHandler} {...props}>{btnname}</button>
+      <button className={` ${className}`} onClick={onClickHandler} {...props}>{btnname}</button>
     </>
   )
 }

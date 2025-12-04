@@ -45,10 +45,9 @@
 //           setUserData(userdata.data.user);
           
 //         } 
-//       console.log( userdata.data.user );
       
 //     } catch (error) {
-//       console.log("userdata error", error);
+
 //     }
 //   })();
 

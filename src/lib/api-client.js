@@ -3,7 +3,7 @@ import store from "../redux/store"
 import { loginSuccess, logout } from "../redux/slice/AuthSlice";
 import { HOST } from "../utils/constrants";
 
-console.log("HOST: ", HOST);
+
 const apiClient = axios.create({
   baseURL: HOST,
   withCredentials: true
