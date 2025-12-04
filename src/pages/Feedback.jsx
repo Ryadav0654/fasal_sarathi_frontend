@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Star, Send, ThumbsUp, MessageCircle, Award, TrendingUp, Users, CheckCircle } from 'lucide-react';
+import { apiClient } from '../lib/api-client';
+import { FEEDBACK_ROUTES } from '../utils/constrants';
 
 
 const Feedback = () => {
@@ -17,6 +19,11 @@ const Feedback = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
+    console.log("form data: ", formData)
+    const { data, status } = apiClient.post(FEEDBACK_ROUTES, { ...formData, rating: rating });
+    if (data && status === 201) {
+      toast.success(data.message);
+    }
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
   };
@@ -52,7 +59,7 @@ const Feedback = () => {
       date: '2024-01-20',
       verified: true
     },
-   
+
     {
       name: 'Priya Patel',
       location: 'Gujarat, India',
@@ -73,7 +80,7 @@ const Feedback = () => {
               Your Voice Matters
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Help us improve Fasal-Sarathi by sharing your experience. Your feedback drives innovation 
+              Help us improve Fasal-Sarathi by sharing your experience. Your feedback drives innovation
               and helps us serve farmers better worldwide.
             </p>
           </div>
@@ -130,7 +137,7 @@ const Feedback = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Email Address *
@@ -159,7 +166,7 @@ const Feedback = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Country *
@@ -210,11 +217,10 @@ const Feedback = () => {
                       className="p-1 transition-colors"
                     >
                       <Star
-                        className={`w-8 h-8 ${
-                          star <= (hoverRating || rating)
-                            ? 'text-yellow-400 fill-current'
-                            : 'text-gray-300'
-                        }`}
+                        className={`w-8 h-8 ${star <= (hoverRating || rating)
+                          ? 'text-yellow-400 fill-current'
+                          : 'text-gray-300'
+                          }`}
                       />
                     </button>
                   ))}
@@ -317,18 +323,17 @@ const Feedback = () => {
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-4 h-4 ${
-                            i < testimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                          }`}
+                          className={`w-4 h-4 ${i < testimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                            }`}
                         />
                       ))}
                     </div>
                   </div>
-                  
+
                   <p className="text-gray-700 mb-4 leading-relaxed">
                     &quot;{testimonial.message}&quot;
                   </p>
-                  
+
                   <div className="flex items-center justify-between text-sm text-gray-500">
                     <span>{new Date(testimonial.date).toLocaleDateString()}</span>
                     <div className="flex items-center">

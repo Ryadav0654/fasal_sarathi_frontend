@@ -35,7 +35,7 @@ import {
   BarChart3,
   PieChart
 } from "lucide-react";
-import headerLogo from "../assets/logo-img2.png";
+import headerLogo from "../assets/headerLogo.png";
 import Logo from "../components/Logo.jsx"
 
 ChartJS.register(

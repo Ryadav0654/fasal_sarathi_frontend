@@ -1,10 +1,10 @@
 
 import { Logo } from "../index";
-import footerLogo from "../../assets/logo-img2.png";
+import footerLogo from "../../assets/headerLogo.png";
 import { Link } from "react-router-dom";
 
 
-import {  Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -14,12 +14,12 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-3">
               <Link to={"/"}>
-            <Logo className={"w-24 h-24"} imgUrl={footerLogo} />
-        </Link>
+                <Logo className={"w-24 h-24"} imgUrl={footerLogo} />
+              </Link>
               <h3 className="text-3xl font-extrabold">Fasal-Sarathi</h3>
             </div>
             <p className="text-gray-300 mb-6 max-w-md">
-              Empowering farmers with AI-driven fertilizer recommendations for sustainable agriculture 
+              Empowering farmers with AI-driven fertilizer recommendations for sustainable agriculture
               and improved crop yields. Growing smart, growing sustainably.
             </p>
             <div className="flex space-x-4">
@@ -37,7 +37,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3">
@@ -48,7 +48,7 @@ const Footer = () => {
               <li><a href="#" className="text-gray-300 hover:text-green-400 transition-colors">Blog</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-semibold mb-6">Support</h4>
             <ul className="space-y-3">
@@ -60,7 +60,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        
+
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="grid md:grid-cols-2 gap-8">
             <div>
@@ -80,7 +80,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            
+
             <div>
               <h4 className="text-lg font-semibold mb-4">Newsletter</h4>
               <p className="text-gray-300 mb-4">Subscribe to get the latest updates and farming tips.</p>
@@ -97,7 +97,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
             &copy; 2025 Fasal-Sarathi. All rights reserved. Made with ❤️ for farmers worldwide.

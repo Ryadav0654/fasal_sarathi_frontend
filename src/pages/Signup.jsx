@@ -6,6 +6,9 @@ import { login, register as signup } from "../redux/slice/authThunk";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { User, Mail, Lock, ArrowRight, Sprout, Loader2, CheckCircle2 } from "lucide-react";
+import { toast } from "react-toastify";
+import Logo from "../components/Logo.jsx";
+import headerLogo from "../assets/headerLogo.png";
 
 const SignupSchema = z.object({
   fullName: z.string().min(3, "Name must be at least 3 characters long"),
@@ -32,19 +35,24 @@ const Signup = () => {
 
   const onSubmit = async (data) => {
     setloading(true);
+    const toastId = toast.loading("Registering...");
     const { fullName, email, password } = data;
     try {
       const response = await dispatch(signup({ fullName, email, password })).unwrap();
       if (response) {
         const login_res = await dispatch(login({ email, password })).unwrap();
         if (login_res) {
+          toast.success(login_res.message)
           navigate("/");
         }
-      }
+      };
     } catch (error) {
       console.error("register error: ", error);
+      toast.error(error.message);
+      toast.dismiss(toastId);
     } finally {
       setloading(false);
+      toast.dismiss(toastId);
     }
   };
 
@@ -53,14 +61,16 @@ const Signup = () => {
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-green-900/90 to-black/60 backdrop-blur-sm"></div>
 
-      <div className="relative w-full max-w-lg p-8 mx-4">
+      <div className="relative w-full max-w-lg md:p-8 mx-4">
         {/* Glass Card */}
         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl overflow-hidden p-8 animate-in fade-in zoom-in duration-300">
 
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-green-500/20 text-green-400 mb-4 border border-green-500/30 shadow-lg shadow-green-900/20">
-              <Sprout size={32} />
+            <div className="inline-flex items-center justify-center mb-2">
+              <Link to="/" className="flex items-center gap-2 text-green-700 font-bold text-xl">
+                <Logo className={"w-24 h-20"} imgUrl={headerLogo} />
+              </Link>
             </div>
             <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">Create Account</h1>
             <p className="text-green-100/80 text-sm">Join Fasal Sarathi today</p>

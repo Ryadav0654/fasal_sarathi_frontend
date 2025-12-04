@@ -4,10 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
-import { apiClient } from "../lib/api-client.js";
+import { login } from "../redux/slice/authThunk.js";
 import { loginSuccess } from "../redux/slice/AuthSlice.js";
-import { LOGIN_ROUTE } from "../utils/constrants.js";
-import { Mail, Lock, ArrowRight, Sprout, Loader2 } from "lucide-react";
+import { Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
+import Logo from "../components/Logo.jsx";
+import headerLogo from "../assets/headerLogo.png";
+
 
 const Login = () => {
   const [loading, setloading] = useState(false);
@@ -23,12 +25,7 @@ const Login = () => {
   const handleLogin = async (userData) => {
     try {
       setloading(true);
-      const { data, status } = await apiClient.post(LOGIN_ROUTE, userData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
+      const { data, status } = await dispatch(login(userData)).unwrap();
       if (data && status === 200) {
         dispatch(loginSuccess(data.accessToken));
         toast.success(data.message);
@@ -51,14 +48,16 @@ const Login = () => {
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-green-900/90 to-black/60 backdrop-blur-sm"></div>
 
-      <div className="relative w-full max-w-md p-8 mx-4">
+      <div className="relative w-full max-w-md md:p-8 mx-4">
         {/* Glass Card */}
         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl overflow-hidden p-8 animate-in fade-in zoom-in duration-300">
 
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-green-500/20 text-green-400 mb-4 border border-green-500/30 shadow-lg shadow-green-900/20">
-              <Sprout size={32} />
+            <div className="inline-flex items-center justify-center mb-2">
+              <Link to="/" className="flex items-center gap-2 text-green-700 font-bold text-xl">
+                <Logo className={"w-24 h-20"} imgUrl={headerLogo} />
+              </Link>
             </div>
             <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">Welcome Back</h1>
             <p className="text-green-100/80 text-sm">Sign in to continue to Fasal Sarathi</p>
